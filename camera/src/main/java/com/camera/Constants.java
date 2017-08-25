@@ -38,7 +38,9 @@ public class Constants {
     public static final int VIDEO_QUALITY_HIGHEST = CameraKit.Constants.VIDEO_QUALITY_HIGHEST;
     public static final int VIDEO_QUALITY_LOWEST = CameraKit.Constants.VIDEO_QUALITY_LOWEST;
 
-
+    public static final int MODE_NONE = 0;
+    public static final int MODE_CAMERA = 1;
+    public static final int MODE_VIDEO = 2;
 
     static final int DEFAULT_FACING = CameraKit.Constants.FACING_BACK;
     static final int DEFAULT_FLASH = CameraKit.Constants.FLASH_OFF;

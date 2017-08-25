@@ -29,6 +29,8 @@ public class Param implements Parcelable {
     int permissions = DEFAULT_PERMISSIONS;
     int jpegQuality = DEFAULT_JPEG_QUALITY;
     int videoQuality = DEFAULT_VIDEO_QUALITY;
+    int mode = Constants.MODE_CAMERA;
+    int second = 0;
     boolean cropOutput = DEFAULT_CROP_OUTPUT;
     boolean adjustViewBound = DEFAULT_ADJUST_VIEW_BOUNDS;
     Activity activity;
@@ -77,6 +79,10 @@ public class Param implements Parcelable {
         return activity;
     }
 
+    public int getMode() {
+        return mode;
+    }
+
     public void setFacing(int facing) {
         this.facing = facing;
     }
@@ -121,6 +127,17 @@ public class Param implements Parcelable {
         this.activity = activity;
     }
 
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
+
+    public int getSecond() {
+        return second;
+    }
+
+    public void setSecond(int second) {
+        this.second = second;
+    }
 
     @Override
     public int describeContents() {
@@ -134,15 +151,17 @@ public class Param implements Parcelable {
         dest.writeInt(focus);
         dest.writeInt(method);
         dest.writeInt(zoom);
+        dest.writeInt(mode);
         dest.writeInt(permissions);
         dest.writeInt(jpegQuality);
         dest.writeInt(videoQuality);
         dest.writeByte((byte) (cropOutput ? 0x01 : 0x00));
         dest.writeByte((byte) (adjustViewBound ? 0x01 : 0x00));
+        dest.writeInt(second);
     }
 
     @SuppressWarnings("unused")
-    public static final Creator<Param> CREATOR = new Creator<Param>() {
+    public static final Parcelable.Creator<Param> CREATOR = new Parcelable.Creator<Param>() {
         @Override
         public Param createFromParcel(Parcel in) {
             Param param = new Param();
@@ -151,11 +170,13 @@ public class Param implements Parcelable {
             param.focus = in.readInt();
             param.method = in.readInt();
             param.zoom = in.readInt();
+            param.mode = in.readInt();
             param.permissions = in.readInt();
             param.jpegQuality = in.readInt();
             param.videoQuality = in.readInt();
             param.cropOutput = in.readByte() != 0x00;
             param.adjustViewBound = in.readByte() != 0x00;
+            param.second = in.readInt();
             return param;
         }
 

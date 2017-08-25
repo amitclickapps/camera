@@ -3,6 +3,9 @@ package com.camera;
 import android.app.Activity;
 import android.content.Intent;
 
+import static com.camera.CaptureActivity.REQUEST_CODE;
+import static com.camera.Constants.MODE_NONE;
+
 /**
  * Created by amit on 24/8/17.
  */
@@ -10,49 +13,6 @@ import android.content.Intent;
 public class CameraUtil {
 
     private Param param;
-//    public Activity getActivity() {
-//        return activity;
-//    }
-//
-//    public int getFacing() {
-//        return facing;
-//    }
-//
-//    public int getFlash() {
-//        return flash;
-//    }
-//
-//    public int getFocus() {
-//        return focus;
-//    }
-//
-//    public int getMethod() {
-//        return method;
-//    }
-//
-//    public int getZoom() {
-//        return zoom;
-//    }
-//
-//    public int getPermissions() {
-//        return permissions;
-//    }
-//
-//    public int getJpegQuality() {
-//        return jpegQuality;
-//    }
-//
-//    public int getVideoQuality() {
-//        return videoQuality;
-//    }
-//
-//    public boolean isCropOutput() {
-//        return cropOutput;
-//    }
-//
-//    public boolean isAdjustViewBound() {
-//        return adjustViewBound;
-//    }
 
     private CameraUtil() {
 
@@ -110,19 +70,34 @@ public class CameraUtil {
         return this;
     }
 
-    public void setAdjustViewBound(boolean adjustViewBound) {
+    public CameraUtil setAdjustViewBound(boolean adjustViewBound) {
         param.adjustViewBound = adjustViewBound;
+        return this;
+    }
+
+    public CameraUtil setMaxRecording(int second) {
+        param.second = second;
+        return this;
+    }
+
+    public void launch() {
+        Intent intent = new Intent(param.activity, CaptureActivity.class);
+        param.mode = MODE_NONE;
+        intent.putExtra(CaptureActivity.CONFIGURATION, param);
+        param.activity.startActivityForResult(intent, REQUEST_CODE);
     }
 
     public void launchCamera() {
         Intent intent = new Intent(param.activity, CaptureActivity.class);
+        param.mode = Constants.MODE_CAMERA;
         intent.putExtra(CaptureActivity.CONFIGURATION, param);
-        param.activity.startActivity(intent);
+        param.activity.startActivityForResult(intent, REQUEST_CODE);
     }
 
     public void launchVideo() {
         Intent intent = new Intent(param.activity, CaptureActivity.class);
+        param.mode = Constants.MODE_VIDEO;
         intent.putExtra(CaptureActivity.CONFIGURATION, param);
-        param.activity.startActivity(intent);
+        param.activity.startActivityForResult(intent, REQUEST_CODE);
     }
 }

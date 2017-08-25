@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.amitclickapps'
 version = '1.0.0'
 
@@ -25,7 +25,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.flurgle:camerakit:0.9.17'
+    compile 'com.flurgle:camerakit:0.9.18'
 }
 
 // build a jar with source files
